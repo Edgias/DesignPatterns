@@ -3,6 +3,7 @@ using Edgias.DesignPatterns.Essentials;
 using Edgias.DesignPatterns.Memento;
 using Edgias.DesignPatterns.Iterator;
 using Edgias.DesignPatterns.Strategy;
+using Edgias.DesignPatterns.Template;
 
 namespace Edgias.DesignPatterns
 {
@@ -10,7 +11,7 @@ namespace Edgias.DesignPatterns
     {
         static void Main(string[] args)
         {
-            Strategy();
+            Template();
         }
 
         static void Greet(string name)
@@ -81,6 +82,12 @@ namespace Edgias.DesignPatterns
             ImageStorage imageStorage = new ImageStorage(compressor, filter);
 
             imageStorage.Store("Video File");
+        }
+
+        static void Template()
+        {
+            TransferMoney transferMoney = new TransferMoney();
+            transferMoney.Execute();
         }
     }
 }
