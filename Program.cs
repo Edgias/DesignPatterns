@@ -1,6 +1,8 @@
 ﻿using System;
 using Edgias.DesignPatterns.Essentials;
 using Edgias.DesignPatterns.Memento;
+using Edgias.DesignPatterns.Iterator;
+using Edgias.DesignPatterns.Strategy;
 
 namespace Edgias.DesignPatterns
 {
@@ -8,7 +10,7 @@ namespace Edgias.DesignPatterns
     {
         static void Main(string[] args)
         {
-            Memento();
+            Strategy();
         }
 
         static void Greet(string name)
@@ -54,6 +56,31 @@ namespace Edgias.DesignPatterns
             editor.Restore(history.Pop());
 
             Console.WriteLine(editor.Content);
+        }
+
+        static void Iterator()
+        {
+            BrowserHistory browserHistory = new BrowserHistory();
+            browserHistory.Push("edgias.com");
+            browserHistory.Push("apps.edgias.com");
+            browserHistory.Push("sales.edgias.com");
+
+            IIterator iterator = browserHistory.CreateIterator();
+            while(iterator.HasNext())
+            {
+                var url = iterator.Current();
+                Console.WriteLine(url);
+                iterator.Next();
+            }
+        }
+
+        static void Strategy()
+        {
+            JpegCompressor compressor = new JpegCompressor();
+            BlackAndWhiteFilter filter = new BlackAndWhiteFilter();
+            ImageStorage imageStorage = new ImageStorage(compressor, filter);
+
+            imageStorage.Store("Video File");
         }
     }
 }
