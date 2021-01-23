@@ -4,6 +4,8 @@ using Edgias.DesignPatterns.Memento;
 using Edgias.DesignPatterns.Iterator;
 using Edgias.DesignPatterns.Strategy;
 using Edgias.DesignPatterns.Template;
+using Edgias.DesignPatterns.Command;
+using Edgias.DesignPatterns.Command.Framework;
 
 namespace Edgias.DesignPatterns
 {
@@ -11,7 +13,7 @@ namespace Edgias.DesignPatterns
     {
         static void Main(string[] args)
         {
-            Template();
+            Command();
         }
 
         static void Greet(string name)
@@ -88,6 +90,14 @@ namespace Edgias.DesignPatterns
         {
             TransferMoney transferMoney = new TransferMoney();
             transferMoney.Execute();
+        }
+
+        static void Command()
+        {
+            CustomerService customerService = new CustomerService();
+            AddCustomerCommand addCustomerCommand = new AddCustomerCommand(customerService);
+            Button button = new Button(addCustomerCommand);
+            button.Click();
         }
     }
 }
